@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Demo Chatroom</title>
+  </head>
+  <body>
+
+      <textarea style="position: absoulte; height: 400px; width: 400px;"></textarea>
+      <br>
+      <input style="position: relative;" type="text" />
+      <button>Send</button>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+
+
+
+      $(document).ready(function() {
+
+        $('button').click(function() {
+          var message = $('input').val();
+          socket.emit("msg", message);
+        });
+
+        socket.on("message", function(theMsg) {
+          //var currentText = $('textarea').val();
+          //$('textarea').val(currentText + theMsg);
+          $('textarea').append(theMsg + '&#xA;');
+        });
+
+      });
+    </script>
+  </body>
+</html>
